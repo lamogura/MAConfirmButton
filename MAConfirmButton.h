@@ -23,7 +23,7 @@ typedef enum {
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *confirm;
 @property (nonatomic, copy) NSString *disabled;
-@property (nonatomic, copy) UIColor *tint;
+//@property (nonatomic, copy) UIColor *tint;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
 + (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString;
@@ -33,5 +33,11 @@ typedef enum {
 - (void)setTitle:(NSString *)title andConfirm:(NSString*)confirm;
 
 - (void)setAnchor:(CGPoint)anchor;
+- (void)setMaTint:(UIColor *)color;
+- (void)setTitle:(NSString *)title andConfirm:(NSString*)confirm;
+- (BOOL)isDisabled;
+- (void)setConfirmed:(BOOL)isConfirmed;
+- (void)cancel;
+- (void)setButtonSelected:(BOOL)newButtonSelected;
 
 @end
