@@ -23,7 +23,6 @@ typedef enum {
 @property (nonatomic, copy) NSString *maTitle;
 @property (nonatomic, copy) NSString *maConfirmTitle;
 @property (nonatomic, copy) NSString *maDisabledTitle;
-//@property (nonatomic, copy) UIColor *tint;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
 + (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString;

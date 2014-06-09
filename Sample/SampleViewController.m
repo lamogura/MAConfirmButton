@@ -9,7 +9,7 @@
 #import "MAConfirmButton.h"
 
 @interface SampleViewController ()
-
+@property IBOutlet MAConfirmButton *ibButton;
 - (void)setupView;
 - (void)resetUI;
 - (void)confirmAction:(id)sender;
@@ -31,7 +31,9 @@
 - (void)setupView{
   
   for(UIView *view in self.view.subviews){
-    [view removeFromSuperview];
+      if (view != self.ibButton) {
+        [view removeFromSuperview];
+      }
   }
   
   MAConfirmButton *defaultButton = [MAConfirmButton buttonWithTitle:@"$9.99" confirm:@"BUY NOW"];
@@ -60,6 +62,8 @@
   [resetButton setMaTint:[UIColor colorWithRed:0.694 green:0.184 blue:0.196 alpha:1]];
   [resetButton setAnchor:CGPointMake(200, 250)];
   [self.view addSubview:resetButton];
+    
+    [self.ibButton setTitle:@"Xib" andConfirm:@"Click me"];
   
 }
 
@@ -67,7 +71,7 @@
   [self setupView];
 }
 
-- (void)confirmAction:(id)sender{
+- (IBAction)confirmAction:(id)sender{
   [sender disableWithTitle:@"CONFIRMED"];
 }
 

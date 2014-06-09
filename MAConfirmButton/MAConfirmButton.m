@@ -226,6 +226,7 @@
         
         [CATransaction commit];
         [self setNeedsDisplay];
+        [self setNeedsUpdateConstraints];
     }
 }
 
@@ -268,6 +269,7 @@
         _colorLayer.borderColor = _maTint.CGColor;
         [self setTitleColor:_maTint forState:UIControlStateNormal];
         [self setNeedsDisplay];
+        [self setNeedsUpdateConstraints];
     }
 }
 
@@ -288,6 +290,7 @@
     [self setTitleColor:self.maTint forState:UIControlStateNormal];
     
     [self setNeedsDisplay];
+    [self setNeedsUpdateConstraints];
 }
 
 - (void)darken {
@@ -330,15 +333,25 @@
             [self lighten];		
             self.buttonSelected = YES;
             if (!self.cancelOverlay) {
-                self.cancelOverlay = [UIButton buttonWithType:UIButtonTypeCustom];
-                [self.cancelOverlay setFrame:CGRectMake(0, 0, 1024, 1024)];
-                [self.cancelOverlay addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchDown];
-                [self.superview addSubview:self.cancelOverlay];
+                UIApplication *app = [UIApplication sharedApplication];
+                _cancelOverlay = [UIButton buttonWithType:UIButtonTypeCustom];
+                [_cancelOverlay setFrame:app.keyWindow.bounds];
+                [_cancelOverlay addTarget:self action:@selector(handleCancelOverlayTouch:event:) forControlEvents:UIControlEventTouchDown];
+                [app.keyWindow addSubview:_cancelOverlay];
             }
-            [self.superview bringSubviewToFront:self];
         }
     }
-    
+}
+
+- (void)handleCancelOverlayTouch:(id)sender event:(UIEvent *)event
+{
+    UITouch *touch = [[event touchesForView:sender] anyObject];
+    CGPoint pt = [touch locationInView:self];
+    if (CGRectContainsPoint(self.bounds, pt)) {
+        [self sendActionsForControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [self cancel];
+    }
 }
 
 - (void)cancel {
@@ -362,8 +375,4 @@
     [self toggle];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    
-}
 @end
