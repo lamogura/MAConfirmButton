@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) BOOL buttonSelected;
 @property (nonatomic, assign) BOOL confirmed;
+@property BOOL disabled;
 @property (nonatomic, retain) CALayer *colorLayer;
 @property (nonatomic, retain) CALayer *darkenLayer;
 @property (nonatomic, retain) UIButton *cancelOverlay;
@@ -48,21 +49,21 @@
 - (id)initWithDisabledTitle:(NSString *)disabledString {
     self = [super initWithFrame:CGRectZero];
     if (self != nil) {
-        _disabled = [disabledString retain];
+        _disabledTitle = disabledString;
 
         _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
 
         self.layer.needsDisplayOnBoundsChange = YES;
         self.maTint = [UIColor colorWithWhite:0.85 alpha:1];
 
-        CGSize size = [self.title sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+        CGSize size = [self.disabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
 
         CGRect r = self.frame;
         r.size.height = kHeight;
         r.size.width = size.width+kPadding;
         self.frame = r;
 
-        [self setTitle:self.disabled forState:UIControlStateNormal];
+        [self setTitle:self.disabledTitle forState:UIControlStateNormal];
         [self setTitleColor:self.maTint forState:UIControlStateNormal];
         
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -89,8 +90,8 @@
 - (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
     self = [super initWithFrame:CGRectZero];
     if (self != nil) {
-        self.title = [titleString retain];
-        self.confirm = [confirmString retain];
+        _title = titleString;
+        _confirm = confirmString;
 
         self.toggleAnimation = MAConfirmButtonToggleAnimationLeft;
         self.maTint = [UIColor colorWithRed:0.220 green:0.357 blue:0.608 alpha:1];
@@ -124,9 +125,9 @@
         CGSize size;
 
         if (self.disabled) {
-            [self setTitle:self.disabled forState:UIControlStateNormal];
+            [self setTitle:self.disabledTitle forState:UIControlStateNormal];
             [self setTitleColor:self.maTint forState:UIControlStateNormal];
-            size = [self.disabled sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            size = [self.disabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
         } else if (self.buttonSelected) {
             [self setTitle:self.confirm forState:UIControlStateNormal];
             size = [self.confirm sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
@@ -255,7 +256,7 @@
 }
 
 - (void)disableWithTitle:(NSString *)disabledString {
-    self.disabled = [disabledString retain];
+    self.disabledTitle = disabledString;
     [self toggle];
 }
 
@@ -351,12 +352,12 @@
         self.cancelOverlay = nil;
     }	
     self.buttonSelected = NO;
-    _disabled = nil;
+    _disabled = NO;
     _confirmed = NO;
     [self toggle];
 }
 
-- (BOOL)isDisabled {
+- (BOOL)isDisabled{
     return _disabled;
 }
 

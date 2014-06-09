@@ -22,7 +22,7 @@ typedef enum {
 @property (nonatomic, assign) MAConfirmButtonToggleAnimation toggleAnimation;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *confirm;
-@property (nonatomic, copy) NSString *disabled;
+@property (nonatomic, copy) NSString *disabledTitle;
 //@property (nonatomic, copy) UIColor *tint;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
@@ -35,7 +35,6 @@ typedef enum {
 - (void)setAnchor:(CGPoint)anchor;
 - (void)setMaTint:(UIColor *)color;
 - (void)setTitle:(NSString *)title andConfirm:(NSString*)confirm;
-- (BOOL)isDisabled;
 - (void)setConfirmed:(BOOL)isConfirmed;
 - (void)cancel;
 - (void)setButtonSelected:(BOOL)newButtonSelected;
