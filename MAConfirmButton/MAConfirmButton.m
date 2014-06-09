@@ -31,39 +31,34 @@
 @end
 
 @implementation MAConfirmButton
-
-- (void)dealloc {
-    [super dealloc];
-}
-
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
-    MAConfirmButton *button = [[[super alloc] initWithTitle:titleString confirm:confirmString] autorelease];
+    MAConfirmButton *button = [[super alloc] initWithTitle:titleString confirm:confirmString];
     return button;
 }
 
 + (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString {
-    MAConfirmButton *button = [[[super alloc] initWithDisabledTitle:disabledString] autorelease];
+    MAConfirmButton *button = [[super alloc] initWithDisabledTitle:disabledString];
     return button;
 }
 
 - (id)initWithDisabledTitle:(NSString *)disabledString {
     self = [super initWithFrame:CGRectZero];
     if (self != nil) {
-        _disabledTitle = disabledString;
+        _maDisabledTitle = disabledString;
 
         _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
 
         self.layer.needsDisplayOnBoundsChange = YES;
         self.maTint = [UIColor colorWithWhite:0.85 alpha:1];
 
-        CGSize size = [self.disabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+        CGSize size = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
 
         CGRect r = self.frame;
         r.size.height = kHeight;
         r.size.width = size.width+kPadding;
         self.frame = r;
 
-        [self setTitle:self.disabledTitle forState:UIControlStateNormal];
+        [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
         [self setTitleColor:self.maTint forState:UIControlStateNormal];
         
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -90,22 +85,22 @@
 - (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
     self = [super initWithFrame:CGRectZero];
     if (self != nil) {
-        _title = titleString;
-        _confirm = confirmString;
+        _maTitle = titleString;
+        _maConfirmTitle = confirmString;
 
         self.toggleAnimation = MAConfirmButtonToggleAnimationLeft;
         self.maTint = [UIColor colorWithRed:0.220 green:0.357 blue:0.608 alpha:1];
 
         self.layer.needsDisplayOnBoundsChange = YES;
 
-        CGSize size = [self.title sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+        CGSize size = [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
 
         CGRect r = self.frame;
         r.size.height = kHeight;
         r.size.width = size.width+kPadding;
         self.frame = r;
 
-        [self setTitle:self.title forState:UIControlStateNormal];
+        [self setTitle:self.maTitle forState:UIControlStateNormal];
         [self setTitleColor:self.maTint forState:UIControlStateNormal];
         
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -125,15 +120,15 @@
         CGSize size;
 
         if (self.disabled) {
-            [self setTitle:self.disabledTitle forState:UIControlStateNormal];
+            [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
             [self setTitleColor:self.maTint forState:UIControlStateNormal];
-            size = [self.disabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            size = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
         } else if (self.buttonSelected) {
-            [self setTitle:self.confirm forState:UIControlStateNormal];
-            size = [self.confirm sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            [self setTitle:self.maConfirmTitle forState:UIControlStateNormal];
+            size = [self.maConfirmTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
         } else {
-            [self setTitle:self.title forState:UIControlStateNormal];
-            size = [self.title sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            [self setTitle:self.maTitle forState:UIControlStateNormal];
+            size = [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
         }
         
         size.width += kPadding;
@@ -207,7 +202,7 @@
         }
         [self setTitleColor:titleColor forState:UIControlStateNormal];
         
-        [_colorLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
+        [self.colorLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
 
         //Animate layer scaling
         for (CALayer *layer in self.layer.sublayers) {
@@ -256,7 +251,7 @@
 }
 
 - (void)disableWithTitle:(NSString *)disabledString {
-    self.disabledTitle = disabledString;
+    self.maDisabledTitle = disabledString;
     [self toggle];
 }
 
@@ -277,8 +272,8 @@
 }
 
 - (void)setTitle:(NSString *)newtitle andConfirm:(NSString *)newConfirm {
-    self.title = newtitle;
-    self.confirm = newConfirm;
+    self.maTitle = newtitle;
+    self.maConfirmTitle = newConfirm;
     if (!self.colorLayer) {
         [self setupLayers];
     }
@@ -367,4 +362,8 @@
     [self toggle];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    
+}
 @end

@@ -20,9 +20,9 @@ typedef enum {
 @interface MAConfirmButton : UIButton
 
 @property (nonatomic, assign) MAConfirmButtonToggleAnimation toggleAnimation;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *confirm;
-@property (nonatomic, copy) NSString *disabledTitle;
+@property (nonatomic, copy) NSString *maTitle;
+@property (nonatomic, copy) NSString *maConfirmTitle;
+@property (nonatomic, copy) NSString *maDisabledTitle;
 //@property (nonatomic, copy) UIColor *tint;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
