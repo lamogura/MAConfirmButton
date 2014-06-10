@@ -42,8 +42,7 @@
     MAConfirmButton *button = [[MAConfirmButton alloc] initWithFrame:r];
     button.maTitle = titleString;
     button.maConfirmTitle = confirmString;
-    [button setTitle:button.maTitle forState:UIControlStateNormal];
-    [button setTitleColor:button.maTint forState:UIControlStateNormal];
+//    [button setTitle:button.maTitle forState:UIControlStateNormal];
     button.maTint = kTint;
     
     return button;
@@ -59,7 +58,7 @@
     
     MAConfirmButton *button = [[MAConfirmButton alloc] initWithFrame:r];
     button.maDisabledTitle = disabledString;
-    [button setTitle:button.maDisabledTitle forState:UIControlStateNormal];
+//    [button setTitle:button.maDisabledTitle forState:UIControlStateNormal];
     button.maTint = kTintDisabled;
     button.disabled = YES;
     
@@ -70,17 +69,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
-        
-        self.layer.needsDisplayOnBoundsChange = YES;
-        
-        [self setTitleColor:self.maTint forState:UIControlStateNormal];
-        
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.titleLabel.backgroundColor = [UIColor clearColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
-        
-        [self setupLayers];
+        [self initButton];
     }
     return self;
 }
@@ -116,14 +105,39 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self initButton];
+}
+
+- (void) initButton
+{
     _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
     self.layer.needsDisplayOnBoundsChange = YES;
+    
+    [self setTitleColor:self.maTint forState:UIControlStateNormal];
     
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
     
     [self setupLayers];
+    
+    [self addObserver:self forKeyPath:@"maTint" options:0 context:nil];
+    [self addObserver:self forKeyPath:@"confirmed" options:NSKeyValueObservingOptionOld context:nil];
+    [self addObserver:self forKeyPath:@"selected" options:NSKeyValueObservingOptionOld context:nil];
+    [self addObserver:self forKeyPath:@"maDisabledTitle" options:0 context:nil];
+    [self addObserver:self forKeyPath:@"maTitle" options:0 context:nil];
+    [self addObserver:self forKeyPath:@"maConfirmTitle" options:0 context:nil];
+    [self addObserver:self forKeyPath:@"disabled" options:0 context:nil];
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"maTint"];
+    [self removeObserver:self forKeyPath:@"confirmed"];
+    [self removeObserver:self forKeyPath:@"selected"];
+    [self removeObserver:self forKeyPath:@"maDisabledTitle"];
+    [self removeObserver:self forKeyPath:@"maConfirmTitle"];
+    [self removeObserver:self forKeyPath:@"disabled"];
 }
 
 //- (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
@@ -167,7 +181,7 @@
             [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
             [self setTitleColor:self.maTint forState:UIControlStateNormal];
             size = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
-        } else if (self.buttonSelected) {
+        } else if (self.selected) {
             [self setTitle:self.maConfirmTitle forState:UIControlStateNormal];
             size = [self.maConfirmTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
         } else {
@@ -240,9 +254,9 @@
             colorAnimation.toValue = (id)[UIColor colorWithWhite:0.85 alpha:1].CGColor;
             titleColor = [UIColor colorWithWhite:0.85 alpha:1];
         } else {
-            colorAnimation.fromValue = self.buttonSelected ? (id)self.maTint.CGColor : (id)greenColor.CGColor;
-            colorAnimation.toValue = self.buttonSelected ? (id)greenColor.CGColor : (id)self.maTint.CGColor;
-            titleColor = self.buttonSelected ? greenColor : self.maTint;
+            colorAnimation.fromValue = self.selected ? (id)self.maTint.CGColor : (id)greenColor.CGColor;
+            colorAnimation.toValue = self.selected ? (id)greenColor.CGColor : (id)self.maTint.CGColor;
+            titleColor = self.selected ? greenColor : self.maTint;
         }
         [self setTitleColor:titleColor forState:UIControlStateNormal];
         
@@ -288,12 +302,12 @@
     [self bringSubviewToFront:self.titleLabel];
 }
 
-- (void)setButtonSelected:(BOOL)buttonSelected
-{
-    _buttonSelected = buttonSelected;
-    self.selected = buttonSelected;
-    [self toggle];
-}
+//- (void)setButtonSelected:(BOOL)buttonSelected
+//{
+//    _buttonSelected = buttonSelected;
+//    self.selected = buttonSelected;
+//    [self toggle];
+//}
 
 - (void)disableWithTitle:(NSString *)disabledString {
     self.maDisabledTitle = disabledString;
@@ -307,15 +321,15 @@
     self.frame = rect;
 }
 
-- (void)setMaTint:(UIColor *)color {
-    if (_maTint != color) {
-        _maTint = color;
-        _colorLayer.borderColor = _maTint.CGColor;
-        [self setTitleColor:_maTint forState:UIControlStateNormal];
-        [self setNeedsDisplay];
-        [self setNeedsUpdateConstraints];
-    }
-}
+//- (void)setMaTint:(UIColor *)color {
+//    if (_maTint != color) {
+//        _maTint = color;
+//        _colorLayer.borderColor = _maTint.CGColor;
+//        [self setTitleColor:_maTint forState:UIControlStateNormal];
+//        [self setNeedsDisplay];
+//        [self setNeedsUpdateConstraints];
+//    }
+//}
 
 - (void)setTitle:(NSString *)newtitle andConfirm:(NSString *)newConfirm {
     self.maTitle = newtitle;
@@ -367,15 +381,12 @@
         if (!CGRectContainsPoint(self.frame, [[touches anyObject] locationInView:self.superview])) { //TouchUpOutside (Cancelled Touch)
             [self lighten];
             [super touchesCancelled:touches withEvent:event];
-        } else if (self.buttonSelected) {
-            [self lighten];
-            self.confirmed = YES;
-            [self.cancelOverlay removeFromSuperview];
-            self.cancelOverlay = nil;
-            [super touchesEnded:touches withEvent:event];
+//        } else if (self.selected) {
+//            [self buttonDidConfirm];
+//            [super touchesEnded:touches withEvent:event];
         } else {
             [self lighten];		
-            self.buttonSelected = YES;
+            self.selected = YES;
             if (!self.cancelOverlay) {
                 UIApplication *app = [UIApplication sharedApplication];
                 _cancelOverlay = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -387,11 +398,20 @@
     }
 }
 
+- (void) buttonDidConfirm
+{
+    [self lighten];
+    self.confirmed = YES;
+    [self.cancelOverlay removeFromSuperview];
+    self.cancelOverlay = nil;
+}
+
 - (void)handleCancelOverlayTouch:(id)sender event:(UIEvent *)event
 {
     UITouch *touch = [[event touchesForView:sender] anyObject];
     CGPoint pt = [touch locationInView:self];
     if (CGRectContainsPoint(self.bounds, pt)) {
+        [self buttonDidConfirm];    // change to confirmed state first
         [self sendActionsForControlEvents:UIControlEventTouchUpInside];
     } else {
         [self cancel];
@@ -403,9 +423,9 @@
         [self.cancelOverlay removeFromSuperview];
         self.cancelOverlay = nil;
     }	
-    self.buttonSelected = NO;
-    _disabled = NO;
-    _confirmed = NO;
+    self.selected = NO;
+    self.disabled = NO;
+    self.confirmed = NO;
     [self toggle];
 }
 
@@ -413,10 +433,50 @@
     return _disabled;
 }
 
-- (void)setConfirmed:(BOOL)isConfirmed
-{
-    _confirmed = isConfirmed;
-    [self toggle];
-}
+//- (void)setConfirmed:(BOOL)isConfirmed
+//{
+//    _confirmed = isConfirmed;
+//    [self toggle];
+//}
 
+#pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (self == object) {
+        if ([@"confirmed" isEqualToString:keyPath]) {
+            if (![@(self.confirmed) isEqualToNumber:change[NSKeyValueChangeOldKey]]) {
+                [self toggle];
+            }
+        }else if ([@"maTint"isEqualToString:keyPath]) {
+            self.colorLayer.borderColor = self.maTint.CGColor;
+            [self setTitleColor:self.maTint forState:UIControlStateNormal];
+            [self setNeedsDisplay];
+            [self setNeedsUpdateConstraints];
+        }else if ([@"selected" isEqualToString:keyPath]) {
+            if (![@(self.selected) isEqualToNumber:change[NSKeyValueChangeOldKey]]) {
+                [self toggle];
+            }
+        }else if ([@"maDisabledTitle" isEqualToString:keyPath]) {
+            if (self.disabled) {
+                [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
+            }
+        }else if ([@"maTitle" isEqualToString:keyPath]) {
+            if (!self.disabled && !self.confirmed) {
+                [self setTitle:self.maTitle forState:UIControlStateNormal];
+            }
+        }else if ([@"maConfirmTitle" isEqualToString:keyPath]) {
+            if (self.confirmed) {
+                [self setTitle:self.maConfirmTitle forState:UIControlStateNormal];
+            }
+        }else if ([@"disabled" isEqualToString:keyPath]) {
+            if (self.disabled) {
+                [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
+            }else if (self.confirmed) {
+                [self setTitle:self.maConfirmTitle forState:UIControlStateNormal];
+            }else {
+                [self setTitle:self.maTitle forState:UIControlStateNormal];
+            }
+        }
+    }
+}
 @end

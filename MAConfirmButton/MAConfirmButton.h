@@ -22,7 +22,7 @@ typedef enum {
 @property NSString *maConfirmTitle;
 @property NSString *maDisabledTitle;
 @property UIColor *maTint;
-@property BOOL buttonSelected;
+//@property BOOL buttonSelected;
 @property BOOL confirmed;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
@@ -37,6 +37,6 @@ typedef enum {
 - (void)setTitle:(NSString *)title andConfirm:(NSString*)confirm;
 //- (void)setConfirmed:(BOOL)isConfirmed;
 - (void)cancel;
-- (void)setButtonSelected:(BOOL)newButtonSelected;
+//- (void)setButtonSelected:(BOOL)newButtonSelected;
 
 @end
