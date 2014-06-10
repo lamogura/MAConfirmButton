@@ -11,16 +11,15 @@
 #define kHeight 26.0
 #define kPadding 20.0
 #define kFontSize 14.0
+#define kTint [UIColor colorWithRed:0.220 green:0.357 blue:0.608 alpha:1]
+#define kTintDisabled [UIColor colorWithWhite:0.85 alpha:1]
 
 @interface MAConfirmButton ()
 
-@property (nonatomic, assign) BOOL buttonSelected;
-@property (nonatomic, assign) BOOL confirmed;
 @property BOOL disabled;
 @property (nonatomic, retain) CALayer *colorLayer;
 @property (nonatomic, retain) CALayer *darkenLayer;
 @property (nonatomic, retain) UIButton *cancelOverlay;
-@property (nonatomic, retain) UIColor *maTint;
 
 - (void)toggle;
 - (void)setupLayers;
@@ -31,34 +30,50 @@
 @end
 
 @implementation MAConfirmButton
-+ (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
-    MAConfirmButton *button = [[super alloc] initWithTitle:titleString confirm:confirmString];
++ (instancetype)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
+//    MAConfirmButton *button = [[super alloc] initWithTitle:titleString confirm:confirmString];
+    
+    CGSize size = [titleString sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+    
+    CGRect r = CGRectZero;
+    r.size.height = kHeight;
+    r.size.width = size.width+kPadding;
+    
+    MAConfirmButton *button = [[MAConfirmButton alloc] initWithFrame:r];
+    button.maTitle = titleString;
+    button.maConfirmTitle = confirmString;
+    [button setTitle:button.maTitle forState:UIControlStateNormal];
+    [button setTitleColor:button.maTint forState:UIControlStateNormal];
+    button.maTint = kTint;
+    
     return button;
 }
 
-+ (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString {
-    MAConfirmButton *button = [[super alloc] initWithDisabledTitle:disabledString];
++ (instancetype)buttonWithDisabledTitle:(NSString *)disabledString {
+//    MAConfirmButton *button = [[super alloc] initWithDisabledTitle:disabledString];
+    CGSize size = [disabledString sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+    
+    CGRect r = CGRectZero;
+    r.size.height = kHeight;
+    r.size.width = size.width + kPadding;
+    
+    MAConfirmButton *button = [[MAConfirmButton alloc] initWithFrame:r];
+    button.maDisabledTitle = disabledString;
+    [button setTitle:button.maDisabledTitle forState:UIControlStateNormal];
+    button.maTint = kTintDisabled;
+    button.disabled = YES;
+    
     return button;
 }
 
-- (id)initWithDisabledTitle:(NSString *)disabledString {
-    self = [super initWithFrame:CGRectZero];
-    if (self != nil) {
-        _maDisabledTitle = disabledString;
-
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
         _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
-
+        
         self.layer.needsDisplayOnBoundsChange = YES;
-        self.maTint = [UIColor colorWithWhite:0.85 alpha:1];
-
-        CGSize size = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
-
-        CGRect r = self.frame;
-        r.size.height = kHeight;
-        r.size.width = size.width+kPadding;
-        self.frame = r;
-
-        [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
+        
         [self setTitleColor:self.maTint forState:UIControlStateNormal];
         
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -69,6 +84,35 @@
     }
     return self;
 }
+
+//- (id)initWithDisabledTitle:(NSString *)disabledString {
+//    self = [super initWithFrame:CGRectZero];
+//    if (self != nil) {
+//        _maDisabledTitle = disabledString;
+//
+//        _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
+//
+//        self.layer.needsDisplayOnBoundsChange = YES;
+//        self.maTint = [UIColor colorWithWhite:0.85 alpha:1];
+//
+//        CGSize size = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+//
+//        CGRect r = self.frame;
+//        r.size.height = kHeight;
+//        r.size.width = size.width+kPadding;
+//        self.frame = r;
+//
+//        [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
+//        [self setTitleColor:self.maTint forState:UIControlStateNormal];
+//        
+//        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        self.titleLabel.backgroundColor = [UIColor clearColor];
+//        self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
+//        
+//        [self setupLayers];
+//    }
+//    return self;
+//}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -82,35 +126,35 @@
     [self setupLayers];
 }
 
-- (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
-    self = [super initWithFrame:CGRectZero];
-    if (self != nil) {
-        _maTitle = titleString;
-        _maConfirmTitle = confirmString;
-
-        self.toggleAnimation = MAConfirmButtonToggleAnimationLeft;
-        self.maTint = [UIColor colorWithRed:0.220 green:0.357 blue:0.608 alpha:1];
-
-        self.layer.needsDisplayOnBoundsChange = YES;
-
-        CGSize size = [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
-
-        CGRect r = self.frame;
-        r.size.height = kHeight;
-        r.size.width = size.width+kPadding;
-        self.frame = r;
-
-        [self setTitle:self.maTitle forState:UIControlStateNormal];
-        [self setTitleColor:self.maTint forState:UIControlStateNormal];
-        
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        self.titleLabel.backgroundColor = [UIColor clearColor];
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
-        
-        [self setupLayers];
-    }
-    return self;
-}
+//- (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString {
+//    self = [super initWithFrame:CGRectZero];
+//    if (self != nil) {
+//        _maTitle = titleString;
+//        _maConfirmTitle = confirmString;
+//
+//        _toggleAnimation = MAConfirmButtonToggleAnimationLeft;
+//        _maTint = [UIColor colorWithRed:0.220 green:0.357 blue:0.608 alpha:1];
+//
+//        self.layer.needsDisplayOnBoundsChange = YES;
+//
+//        CGSize size = [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+//
+//        CGRect r = self.frame;
+//        r.size.height = kHeight;
+//        r.size.width = size.width+kPadding;
+//        self.frame = r;
+//
+//        [self setTitle:self.maTitle forState:UIControlStateNormal];
+//        [self setTitleColor:self.maTint forState:UIControlStateNormal];
+//        
+//        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+//        self.titleLabel.backgroundColor = [UIColor clearColor];
+//        self.titleLabel.font = [UIFont boldSystemFontOfSize:kFontSize];
+//        
+//        [self setupLayers];
+//    }
+//    return self;
+//}
 
 - (void)toggle {
     if (self.userInteractionEnabled) {

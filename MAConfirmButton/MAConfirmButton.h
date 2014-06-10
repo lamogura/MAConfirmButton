@@ -8,8 +8,6 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@class MAConfirmButtonOverlay;
-
 typedef enum {
   MAConfirmButtonToggleAnimationLeft = 0,
   MAConfirmButtonToggleAnimationRight = 1,
@@ -19,22 +17,25 @@ typedef enum {
 
 @interface MAConfirmButton : UIButton
 
-@property (nonatomic, assign) MAConfirmButtonToggleAnimation toggleAnimation;
-@property (nonatomic, copy) NSString *maTitle;
-@property (nonatomic, copy) NSString *maConfirmTitle;
-@property (nonatomic, copy) NSString *maDisabledTitle;
+@property MAConfirmButtonToggleAnimation toggleAnimation;
+@property NSString *maTitle;
+@property NSString *maConfirmTitle;
+@property NSString *maDisabledTitle;
+@property UIColor *maTint;
+@property BOOL buttonSelected;
+@property BOOL confirmed;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
 + (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString;
-- (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
-- (id)initWithDisabledTitle:(NSString *)disabledString;
+//- (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
+//- (id)initWithDisabledTitle:(NSString *)disabledString;
 - (void)disableWithTitle:(NSString *)disabledString;
 - (void)setTitle:(NSString *)title andConfirm:(NSString*)confirm;
 
 - (void)setAnchor:(CGPoint)anchor;
-- (void)setMaTint:(UIColor *)color;
+//- (void)setMaTint:(UIColor *)color;
 - (void)setTitle:(NSString *)title andConfirm:(NSString*)confirm;
-- (void)setConfirmed:(BOOL)isConfirmed;
+//- (void)setConfirmed:(BOOL)isConfirmed;
 - (void)cancel;
 - (void)setButtonSelected:(BOOL)newButtonSelected;
 
