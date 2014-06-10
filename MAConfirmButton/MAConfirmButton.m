@@ -134,6 +134,7 @@
     [self removeObserver:self forKeyPath:@"confirmed"];
     [self removeObserver:self forKeyPath:@"selected"];
     [self removeObserver:self forKeyPath:@"maDisabledTitle"];
+    [self removeObserver:self forKeyPath:@"maTitle"];
     [self removeObserver:self forKeyPath:@"maConfirmTitle"];
     [self removeObserver:self forKeyPath:@"disabled"];
 }
