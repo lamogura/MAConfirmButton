@@ -23,7 +23,8 @@ typedef enum {
 @property NSString *maDisabledTitle;
 @property UIColor *maTint;
 //@property BOOL buttonSelected;
-@property BOOL confirmed;
+@property (getter = isConfirmed) BOOL confirmed;
+@property (getter = isDisabled) BOOL disabled;
 
 + (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
 + (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString;

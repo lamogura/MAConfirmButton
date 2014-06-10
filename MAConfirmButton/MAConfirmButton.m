@@ -15,8 +15,6 @@
 #define kTintDisabled [UIColor colorWithWhite:0.85 alpha:1]
 
 @interface MAConfirmButton ()
-
-@property BOOL disabled;
 @property (nonatomic, retain) CALayer *colorLayer;
 @property (nonatomic, retain) CALayer *darkenLayer;
 @property (nonatomic, retain) UIButton *cancelOverlay;
@@ -174,6 +172,8 @@
     if (self.userInteractionEnabled) {
         self.userInteractionEnabled = NO;
         self.titleLabel.alpha = 0;
+        UIColor *tintColor = self.tintColor;
+        self.tintColor = [UIColor clearColor];
         
         CGSize size;
 
@@ -237,6 +237,7 @@
             [CATransaction commit];
             
             self.titleLabel.alpha = 1;
+            self.tintColor = tintColor;
             [self setNeedsLayout];
         }];
         
@@ -429,9 +430,9 @@
     [self toggle];
 }
 
-- (BOOL)isDisabled{
-    return _disabled;
-}
+//- (BOOL)isDisabled{
+//    return _disabled;
+//}
 
 //- (void)setConfirmed:(BOOL)isConfirmed
 //{
