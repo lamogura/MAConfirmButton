@@ -1,0 +1,3 @@
+target 'MAConfirmButton', :exclusive => true do
+  pod "MAConfirmButtoniOS7", :path => "../"
+end

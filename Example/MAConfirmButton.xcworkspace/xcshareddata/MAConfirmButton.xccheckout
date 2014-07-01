@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>54F355F1-0D23-4DB1-9124-C712325A2ED1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MAConfirmButton</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AAECC808-3699-49EF-80C2-12500C928256</key>
+		<string>https://github.com/ronail/MAConfirmButton</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Example/MAConfirmButton.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AAECC808-3699-49EF-80C2-12500C928256</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ronail/MAConfirmButton</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AAECC808-3699-49EF-80C2-12500C928256</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AAECC808-3699-49EF-80C2-12500C928256</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MAConfirmButton</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,16 @@
+PODS:
+  - MAConfirmButtoniOS7 (1.6.3):
+    - MAConfirmButtoniOS7/no-arc
+  - MAConfirmButtoniOS7/no-arc (1.6.3)
+
+DEPENDENCIES:
+  - MAConfirmButtoniOS7 (from `../`)
+
+EXTERNAL SOURCES:
+  MAConfirmButtoniOS7:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MAConfirmButtoniOS7: 8c95667275b4963a0276b8e5714fa6c54321e5fd
+
+COCOAPODS: 0.33.1

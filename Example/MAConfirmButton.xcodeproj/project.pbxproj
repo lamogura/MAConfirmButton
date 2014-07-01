@@ -1,0 +1,353 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		270FBCBB134BA43800EEA99B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270FBCBA134BA43800EEA99B /* UIKit.framework */; };
+		270FBCBD134BA43800EEA99B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270FBCBC134BA43800EEA99B /* Foundation.framework */; };
+		270FBCBF134BA43800EEA99B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270FBCBE134BA43800EEA99B /* CoreGraphics.framework */; };
+		27913F51134BA4E700FBEB69 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27913F50134BA4E700FBEB69 /* QuartzCore.framework */; };
+		D03F86AC19632095001774B0 /* SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D03F86A819632095001774B0 /* SampleAppDelegate.m */; };
+		D03F86AD19632095001774B0 /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D03F86AA19632095001774B0 /* SampleViewController.m */; };
+		D03F86BC196320E7001774B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D03F86BB196320E7001774B0 /* main.m */; };
+		D03F86C1196320FE001774B0 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03F86BD196320FE001774B0 /* MainWindow.xib */; };
+		D03F86C2196320FE001774B0 /* SampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D03F86BF196320FE001774B0 /* SampleViewController.xib */; };
+		D0C2B1371963224200E95577 /* libPods-MAConfirmButton-MAConfirmButtoniOS7.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C2B1361963224200E95577 /* libPods-MAConfirmButton-MAConfirmButtoniOS7.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1FE65857FE774D9B9EE38E80 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		270FBCB6134BA43800EEA99B /* MAConfirmButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MAConfirmButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		270FBCBA134BA43800EEA99B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		270FBCBC134BA43800EEA99B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		270FBCBE134BA43800EEA99B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		27913F50134BA4E700FBEB69 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		48ABC87CFECF440C9BF2AADD /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		674580D438E84FF9AF115E8A /* libPods-MAConfirmButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MAConfirmButton.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D03F86A519632095001774B0 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Sample-Info.plist"; path = "MAConfirmButton/Sample-Info.plist"; sourceTree = SOURCE_ROOT; };
+		D03F86A619632095001774B0 /* Sample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Sample-Prefix.pch"; path = "MAConfirmButton/Sample-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		D03F86A719632095001774B0 /* SampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleAppDelegate.h; path = MAConfirmButton/SampleAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		D03F86A819632095001774B0 /* SampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleAppDelegate.m; path = MAConfirmButton/SampleAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		D03F86A919632095001774B0 /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SampleViewController.h; path = MAConfirmButton/SampleViewController.h; sourceTree = SOURCE_ROOT; };
+		D03F86AA19632095001774B0 /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SampleViewController.m; path = MAConfirmButton/SampleViewController.m; sourceTree = SOURCE_ROOT; };
+		D03F86B9196320CA001774B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = MAConfirmButton/en.lproj/InfoPlist.strings; sourceTree = SOURCE_ROOT; };
+		D03F86BB196320E7001774B0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MAConfirmButton/main.m; sourceTree = SOURCE_ROOT; };
+		D03F86BE196320FE001774B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MAConfirmButton/en.lproj/MainWindow.xib; sourceTree = SOURCE_ROOT; };
+		D03F86C0196320FE001774B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MAConfirmButton/en.lproj/SampleViewController.xib; sourceTree = SOURCE_ROOT; };
+		D0C2B1361963224200E95577 /* libPods-MAConfirmButton-MAConfirmButtoniOS7.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MAConfirmButton-MAConfirmButtoniOS7.a"; path = "Pods/build/Debug-iphoneos/libPods-MAConfirmButton-MAConfirmButtoniOS7.a"; sourceTree = "<group>"; };
+		F2702F39AB92491D952B864D /* Pods-MAConfirmButton.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MAConfirmButton.xcconfig"; path = "Pods/Pods-MAConfirmButton.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		270FBCB3134BA43800EEA99B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0C2B1371963224200E95577 /* libPods-MAConfirmButton-MAConfirmButtoniOS7.a in Frameworks */,
+				27913F51134BA4E700FBEB69 /* QuartzCore.framework in Frameworks */,
+				270FBCBB134BA43800EEA99B /* UIKit.framework in Frameworks */,
+				270FBCBD134BA43800EEA99B /* Foundation.framework in Frameworks */,
+				270FBCBF134BA43800EEA99B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		270FBCAB134BA43800EEA99B = {
+			isa = PBXGroup;
+			children = (
+				270FBCC0134BA43800EEA99B /* Sample */,
+				270FBCB9134BA43800EEA99B /* Frameworks */,
+				270FBCB7134BA43800EEA99B /* Products */,
+				48ABC87CFECF440C9BF2AADD /* Pods.xcconfig */,
+				F2702F39AB92491D952B864D /* Pods-MAConfirmButton.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		270FBCB7134BA43800EEA99B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				270FBCB6134BA43800EEA99B /* MAConfirmButton.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		270FBCB9134BA43800EEA99B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0C2B1361963224200E95577 /* libPods-MAConfirmButton-MAConfirmButtoniOS7.a */,
+				27913F50134BA4E700FBEB69 /* QuartzCore.framework */,
+				270FBCBA134BA43800EEA99B /* UIKit.framework */,
+				270FBCBC134BA43800EEA99B /* Foundation.framework */,
+				270FBCBE134BA43800EEA99B /* CoreGraphics.framework */,
+				1FE65857FE774D9B9EE38E80 /* libPods.a */,
+				674580D438E84FF9AF115E8A /* libPods-MAConfirmButton.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		270FBCC0134BA43800EEA99B /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				D03F86A719632095001774B0 /* SampleAppDelegate.h */,
+				D03F86A819632095001774B0 /* SampleAppDelegate.m */,
+				D03F86A919632095001774B0 /* SampleViewController.h */,
+				D03F86AA19632095001774B0 /* SampleViewController.m */,
+				D03F86BD196320FE001774B0 /* MainWindow.xib */,
+				D03F86BF196320FE001774B0 /* SampleViewController.xib */,
+				270FBCC1134BA43800EEA99B /* Supporting Files */,
+			);
+			path = Sample;
+			sourceTree = "<group>";
+		};
+		270FBCC1134BA43800EEA99B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D03F86BB196320E7001774B0 /* main.m */,
+				D03F86B8196320CA001774B0 /* InfoPlist.strings */,
+				D03F86A519632095001774B0 /* Sample-Info.plist */,
+				D03F86A619632095001774B0 /* Sample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		270FBCB5134BA43800EEA99B /* MAConfirmButton */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 270FBCD7134BA43800EEA99B /* Build configuration list for PBXNativeTarget "MAConfirmButton" */;
+			buildPhases = (
+				BF0455ACB23F4E0FB76422C6 /* Check Pods Manifest.lock */,
+				270FBCB2134BA43800EEA99B /* Sources */,
+				270FBCB3134BA43800EEA99B /* Frameworks */,
+				270FBCB4134BA43800EEA99B /* Resources */,
+				78127CC2EC994115A5A80C24 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MAConfirmButton;
+			productName = Sample;
+			productReference = 270FBCB6134BA43800EEA99B /* MAConfirmButton.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		270FBCAD134BA43800EEA99B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 270FBCB0134BA43800EEA99B /* Build configuration list for PBXProject "MAConfirmButton" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 270FBCAB134BA43800EEA99B;
+			productRefGroup = 270FBCB7134BA43800EEA99B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				270FBCB5134BA43800EEA99B /* MAConfirmButton */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		270FBCB4134BA43800EEA99B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D03F86C2196320FE001774B0 /* SampleViewController.xib in Resources */,
+				D03F86C1196320FE001774B0 /* MainWindow.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		78127CC2EC994115A5A80C24 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-MAConfirmButton-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BF0455ACB23F4E0FB76422C6 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		270FBCB2134BA43800EEA99B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D03F86BC196320E7001774B0 /* main.m in Sources */,
+				D03F86AD19632095001774B0 /* SampleViewController.m in Sources */,
+				D03F86AC19632095001774B0 /* SampleAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D03F86B8196320CA001774B0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D03F86B9196320CA001774B0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D03F86BD196320FE001774B0 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D03F86BE196320FE001774B0 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		D03F86BF196320FE001774B0 /* SampleViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D03F86C0196320FE001774B0 /* en */,
+			);
+			name = SampleViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		270FBCD5134BA43800EEA99B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		270FBCD6134BA43800EEA99B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		270FBCD8134BA43800EEA99B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2702F39AB92491D952B864D /* Pods-MAConfirmButton.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MAConfirmButton/Sample-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "$(SRCROOT)/MAConfirmButton/Sample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		270FBCD9134BA43800EEA99B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F2702F39AB92491D952B864D /* Pods-MAConfirmButton.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MAConfirmButton/Sample-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "$(SRCROOT)/MAConfirmButton/Sample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		270FBCB0134BA43800EEA99B /* Build configuration list for PBXProject "MAConfirmButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				270FBCD5134BA43800EEA99B /* Debug */,
+				270FBCD6134BA43800EEA99B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		270FBCD7134BA43800EEA99B /* Build configuration list for PBXNativeTarget "MAConfirmButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				270FBCD8134BA43800EEA99B /* Debug */,
+				270FBCD9134BA43800EEA99B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 270FBCAD134BA43800EEA99B /* Project object */;
+}
