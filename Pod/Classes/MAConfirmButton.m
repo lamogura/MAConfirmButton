@@ -19,6 +19,7 @@
 @property (nonatomic, retain) CALayer *darkenLayer;
 @property (nonatomic, retain) UIButton *cancelOverlay;
 
+
 - (void)toggle;
 - (void)setupLayers;
 - (void)cancel;
@@ -60,6 +61,13 @@
     button.maTint = kTintDisabled;
     button.disabled = YES;
     
+    return button;
+}
+
++ (instancetype)buttonWithFrame:(CGRect)frame
+{
+    MAConfirmButton *button = [[MAConfirmButton alloc] initWithFrame:frame];
+    button.defaultFrame = frame;
     return button;
 }
 
@@ -170,124 +178,132 @@
 //}
 
 - (void)toggle {
-    if (self.userInteractionEnabled) {
-        self.userInteractionEnabled = NO;
-        self.titleLabel.alpha = 0;
-        UIColor *tintColor = self.tintColor;
-        self.tintColor = [UIColor clearColor];
-        
-        CGSize size;
+    if (!self.userInteractionEnabled) {
+        return;
+    }
+    
+    self.userInteractionEnabled = NO;
+    self.titleLabel.alpha = 0;
+    UIColor *tintColor = self.tintColor;
+    self.tintColor = [UIColor clearColor];
+    
+    float offset = ({
+        CGFloat width;
 
         if (self.disabled) {
             [self setTitle:self.maDisabledTitle forState:UIControlStateNormal];
             [self setTitleColor:self.maTint forState:UIControlStateNormal];
-            size = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            width = [self.maDisabledTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}].width;
         } else if (self.selected) {
             [self setTitle:self.maConfirmTitle forState:UIControlStateNormal];
-            size = [self.maConfirmTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            width = [self.maConfirmTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}].width;
         } else {
             [self setTitle:self.maTitle forState:UIControlStateNormal];
-            size = [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}];
+            width = CGRectIsNull(self.defaultFrame) ? [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}].width : CGRectGetWidth(self.defaultFrame) - kPadding;
         }
         
-        size.width += kPadding;
-        float offset = size.width - self.frame.size.width;
+        width += kPadding;
+        width - CGRectGetWidth(self.frame);
+    });
+    
+    [CATransaction begin];
+    [CATransaction setAnimationDuration:0.25];
+    [CATransaction setCompletionBlock:^{
+        [self adjustFrameWithOffset:offset];
         
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:0.25];
-        [CATransaction setCompletionBlock:^{
-            //Readjust button frame for new touch area, move layers back now that animation is done
-            
-            CGRect frameRect = self.frame;
-            switch(self.toggleAnimation) {
-                case MAConfirmButtonToggleAnimationLeft:
-                    frameRect.origin.x = frameRect.origin.x - offset;
-                    break;
-                case MAConfirmButtonToggleAnimationRight:
-                    break;
-                case MAConfirmButtonToggleAnimationCenter:
-                    frameRect.origin.x = frameRect.origin.x - offset/2.0;
-                    break;
-                default:
-                    break;
-            }
-            frameRect.size.width = frameRect.size.width + offset;
-            self.frame = frameRect;
-            
-            [CATransaction setDisableActions:YES];
-            [CATransaction setCompletionBlock:^{
-                self.userInteractionEnabled = YES;
-            }];
-            for (CALayer *layer in self.layer.sublayers) {
-                CGRect rect = layer.frame;
-                switch(self.toggleAnimation) {
-                    case MAConfirmButtonToggleAnimationLeft:
-                        rect.origin.x = rect.origin.x+offset;
-                        break;
-                    case MAConfirmButtonToggleAnimationRight:
-                        break;
-                    case MAConfirmButtonToggleAnimationCenter:
-                        rect.origin.x = rect.origin.x+offset/2.0;
-                        break;
-                    default:
-                        break;
-                }
-                
-                layer.frame = rect;
-            }
-            [CATransaction commit];
-            
-            self.titleLabel.alpha = 1;
-            self.tintColor = tintColor;
-            [self setNeedsLayout];
-        }];
-        
-        UIColor *greenColor = [UIColor colorWithRed:0.439 green:0.741 blue:0.314 alpha:1.];
-        
-        //Animate color change
-        CABasicAnimation *colorAnimation = [CABasicAnimation animationWithKeyPath:@"borderColor"];
-        colorAnimation.removedOnCompletion = NO;
-        colorAnimation.fillMode = kCAFillModeForwards;
-        
-        UIColor* titleColor;
-        
-        if (self.disabled) {
-            colorAnimation.fromValue = (id)greenColor.CGColor;
-            colorAnimation.toValue = (id)[UIColor colorWithWhite:0.85 alpha:1].CGColor;
-            titleColor = [UIColor colorWithWhite:0.85 alpha:1];
-        } else {
-            colorAnimation.fromValue = self.selected ? (id)self.maTint.CGColor : (id)greenColor.CGColor;
-            colorAnimation.toValue = self.selected ? (id)greenColor.CGColor : (id)self.maTint.CGColor;
-            titleColor = self.selected ? greenColor : self.maTint;
-        }
-        [self setTitleColor:titleColor forState:UIControlStateNormal];
-        
-        [self.colorLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
-
-        //Animate layer scaling
-        for (CALayer *layer in self.layer.sublayers) {
-            CGRect rect = layer.frame;
-            
-            switch(self.toggleAnimation) {
-                case MAConfirmButtonToggleAnimationLeft:
-                    rect.origin.x = rect.origin.x-offset;
-                    break;
-                case MAConfirmButtonToggleAnimationRight:
-                    break;
-                case MAConfirmButtonToggleAnimationCenter:
-                    rect.origin.x = rect.origin.x-offset/2.0;
-                    break;
-                default:
-                    break;
-            }
-            rect.size.width = rect.size.width+offset;
-            layer.frame = rect;
-        }
-        
-        [CATransaction commit];
-        [self setNeedsDisplay];
-        [self setNeedsUpdateConstraints];
+        self.titleLabel.alpha = 1;
+        self.tintColor = tintColor;
+        [self setNeedsLayout];
+    }];
+    
+    UIColor *greenColor = [UIColor colorWithRed:0.439 green:0.741 blue:0.314 alpha:1.];
+    
+    //Animate color change
+    CABasicAnimation *colorAnimation = [CABasicAnimation animationWithKeyPath:@"borderColor"];
+    colorAnimation.removedOnCompletion = NO;
+    colorAnimation.fillMode = kCAFillModeForwards;
+    
+    UIColor* titleColor;
+    
+    if (self.disabled) {
+        colorAnimation.fromValue = (id)greenColor.CGColor;
+        colorAnimation.toValue = (id)[UIColor colorWithWhite:0.85 alpha:1].CGColor;
+        titleColor = [UIColor colorWithWhite:0.85 alpha:1];
+    } else {
+        colorAnimation.fromValue = self.selected ? (id)self.maTint.CGColor : (id)greenColor.CGColor;
+        colorAnimation.toValue = self.selected ? (id)greenColor.CGColor : (id)self.maTint.CGColor;
+        titleColor = self.selected ? greenColor : self.maTint;
     }
+    [self setTitleColor:titleColor forState:UIControlStateNormal];
+    
+    [self.colorLayer addAnimation:colorAnimation forKey:@"colorAnimation"];
+
+    //Animate layer scaling
+    for (CALayer *layer in self.layer.sublayers) {
+        CGRect rect = layer.frame;
+        
+        switch(self.toggleAnimation) {
+            case MAConfirmButtonToggleAnimationLeft:
+                rect.origin.x = rect.origin.x-offset;
+                break;
+            case MAConfirmButtonToggleAnimationRight:
+                break;
+            case MAConfirmButtonToggleAnimationCenter:
+                rect.origin.x = rect.origin.x-offset/2.0;
+                break;
+            default:
+                break;
+        }
+        rect.size.width = rect.size.width+offset;
+        layer.frame = rect;
+    }
+    
+    [CATransaction commit];
+    [self setNeedsDisplay];
+    [self setNeedsUpdateConstraints];
+}
+
+- (void) adjustFrameWithOffset:(CGFloat) offset
+{
+    
+    CGRect frameRect = self.frame;
+    switch(self.toggleAnimation) {
+        case MAConfirmButtonToggleAnimationLeft:
+            frameRect.origin.x = frameRect.origin.x - offset;
+            break;
+        case MAConfirmButtonToggleAnimationRight:
+            break;
+        case MAConfirmButtonToggleAnimationCenter:
+            frameRect.origin.x = frameRect.origin.x - offset/2.0;
+            break;
+        default:
+            break;
+    }
+    frameRect.size.width = frameRect.size.width + offset;
+    self.frame = frameRect;
+    
+    [CATransaction setDisableActions:YES];
+    [CATransaction setCompletionBlock:^{
+        self.userInteractionEnabled = YES;
+    }];
+    for (CALayer *layer in self.layer.sublayers) {
+        CGRect rect = layer.frame;
+        switch(self.toggleAnimation) {
+            case MAConfirmButtonToggleAnimationLeft:
+                rect.origin.x = rect.origin.x+offset;
+                break;
+            case MAConfirmButtonToggleAnimationRight:
+                break;
+            case MAConfirmButtonToggleAnimationCenter:
+                rect.origin.x = rect.origin.x+offset/2.0;
+                break;
+            default:
+                break;
+        }
+        
+        layer.frame = rect;
+    }
+    [CATransaction commit];
 }
 
 - (void)setupLayers {

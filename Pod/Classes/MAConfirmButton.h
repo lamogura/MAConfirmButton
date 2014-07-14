@@ -25,9 +25,11 @@ typedef enum {
 //@property BOOL buttonSelected;
 @property (getter = isConfirmed) BOOL confirmed;
 @property (getter = isDisabled) BOOL disabled;
+@property CGRect defaultFrame;
 
-+ (MAConfirmButton *)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
-+ (MAConfirmButton *)buttonWithDisabledTitle:(NSString *)disabledString;
++ (instancetype)buttonWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
++ (instancetype)buttonWithDisabledTitle:(NSString *)disabledString;
++ (instancetype) buttonWithFrame:(CGRect)frame;
 //- (id)initWithTitle:(NSString *)titleString confirm:(NSString *)confirmString;
 //- (id)initWithDisabledTitle:(NSString *)disabledString;
 - (void)disableWithTitle:(NSString *)disabledString;
