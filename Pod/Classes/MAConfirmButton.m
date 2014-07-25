@@ -199,7 +199,7 @@
             width = [self.maConfirmTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}].width;
         } else {
             [self setTitle:self.maTitle forState:UIControlStateNormal];
-            width = CGRectIsNull(self.defaultFrame) ? [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}].width : CGRectGetWidth(self.defaultFrame) - kPadding;
+            width = CGRectIsEmpty(self.defaultFrame) ? [self.maTitle sizeWithAttributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kFontSize]}].width : CGRectGetWidth(self.defaultFrame) - kPadding;
         }
         
         width += kPadding;
