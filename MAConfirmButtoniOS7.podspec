@@ -14,11 +14,11 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
                        MAConfirmButton is an animated subclass of UIButton that replicates and improves upon the behavior of the AppStore “Buy Now” buttons. Built and animated with Core Animation layers, it is completely image free.
                        DESC
-  s.homepage         = "https://github.com/ronail/MAConfirmButton"
+  s.homepage         = "https://github.com/lamogura/MAConfirmButtoniOS7"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Ronald Li" => "ronailhk@gmail.com" }
-  s.source           = { :git => "https://github.com/ronail/MAConfirmButton.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/lamogura/MAConfirmButtoniOS7.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '7.0'
